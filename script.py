@@ -1,22 +1,5 @@
 import pathlib, os, shutil
 
-print("RUNNING")
-
-source_path = pathlib.Path.home()/'Downloads/'
-
-# New folder directories
-images_path = pathlib.Path.home()/'Downloads/Images'
-docs_path = pathlib.Path.home()/'Downloads/Docs'
-zip_path = pathlib.Path.home()/'Downloads/Zip'
-dmg_path = pathlib.Path.home()/'Downloads/Dmg'
-app_path = pathlib.Path.home()/'Downloads/Apps'
-
-#extensions
-image_extensions = ('jpg', 'jpeg', 'png')
-doc_extensions = ('docx', 'pdf', 'pkpass')
-zip_extension = 'zip'
-dmg_extension = 'dmg'
-app_extension = 'app'
 
 def file_mover(destination_path, extensions):
     source_path= pathlib.Path.home()/'Downloads/'
@@ -39,11 +22,16 @@ def file_mover(destination_path, extensions):
             print('file moved!', extensions)
 
 
-file_mover(images_path, image_extensions)
-file_mover(docs_path, doc_extensions)
-file_mover(zip_path, zip_extension)
-file_mover(dmg_path, dmg_extension)
-file_mover(app_path, app_extension)
+print("RUNNING")
 
-# Terminal command:
-# fswatch -0 /Users/mustakimahmedhasan/Downloads | xargs -0 -n 1 -I {} python3 /Users/mustakimahmedhasan/Workspace/Programming/Python/file-management-system/script.py
+source_path = pathlib.Path.home()/'Downloads/'
+addresses = [
+    { 'path': f"{source_path}/Images", 'extension': ('jpg', 'jpeg', 'png') },
+    { 'path': f"{source_path}/Docs", 'extension': ('docx', 'pdf', 'pkpass') },
+    { 'path': f"{source_path}/Zip", 'extension': 'zip' },
+    { 'path': f"{source_path}/Dmg", 'extension': 'dmg' },
+    { 'path': f"{source_path}/Apps", 'extension': 'app' },
+]
+
+for address in addresses:
+    file_mover(address['path'], address['extension'])
